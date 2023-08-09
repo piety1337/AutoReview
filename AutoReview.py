@@ -1,6 +1,7 @@
 import ctypes
 import os
 from colorama import init, Fore
+import WinServ2022
 
 # Initialise colorama for colored output
 init(autoreset=True)
@@ -49,6 +50,7 @@ def main():
             windows_choice = input("Enter your choice (1/2/3): ")
             if windows_choice == "1":
                 print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "CIS Microsoft Windows Server 2022 Benchmark v2.0.0")
+                WinServ2022.run()
             elif windows_choice == "2":
                 print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "CIS Microsoft Windows Server 2019 Benchmark v2.0.0")
             elif windows_choice == "3":
