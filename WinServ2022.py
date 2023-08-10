@@ -8,7 +8,8 @@ def run():
     print(Fore.GREEN + "======== Executing CIS Microsoft Windows Server 2022 Benchmark v2.0.0 script ========")
     time.sleep(2)
     
-print(Fore.BLUE + "======== 1. Account Policies ========")
+def account_policies():   
+    print(Fore.BLUE + "======== 1. Account Policies ========")
 
 def password_policy_check():
     time.sleep(2)
