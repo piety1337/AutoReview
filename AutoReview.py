@@ -53,6 +53,7 @@ def main():
                 WinServ2022.run()
                 WinServ2022.account_policies()
                 WinServ2022.password_policy_check()
+                WinServ2022.spliter()
             elif windows_choice == "2":
                 print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "CIS Microsoft Windows Server 2019 Benchmark v2.0.0")
             elif windows_choice == "3":
