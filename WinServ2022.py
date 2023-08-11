@@ -53,12 +53,12 @@ def password_policy_check():
         print(Fore.RED + "=====================================================================")
         error_checks += 1
     
-    time.sleep(1)
     
     print()
     
     max_password_age = "net accounts | Select-String 'Maximum password age' | ForEach-Object { $_ -replace '\\D+(\\d+)','$1'}"
     max_password_age_result = subprocess.run(['powershell', '-command', max_password_age], shell=True, capture_output=True, text=True)
+    
     if max_password_age_result.returncode == 0:
         output = max_password_age_result.stdout.strip()
         if output.isdigit():
@@ -78,6 +78,43 @@ def password_policy_check():
         print(Fore.RED + f"1.1.2 Command failed. Error output: {max_password_age_result.stderr}")
         print(Fore.RED + "=====================================================================")
         error_checks += 1
+
+
+    print()
+    
+    min_password_age = "net accounts | Select-String 'Minimum password age' | ForEach-Object { $_ -replace '\D+(\d+)','$1'}"
+    min_password_age_result = subprocess.run(['powershell', '-command', min_password_age], shell=True, capture_output=True, text=True)
+    
+    if min_password_age_result.returncode == 0:
+        output = min_password_age_result.stdout.strip()
+        if output.isdigit():
+            min_password_age_value = int(output)
+            if min_password_age_value >= 1:
+                print("[+] 1.1.3 PASSED: Minimum password age value:", min_password_age_value)
+                passed_checks += 1
+            else:
+                print(Fore.RED + "[-] 1.1.3 FAILED: Minimum password age value:", min_password_age_value)
+                print(Fore.RED + "   [!] Minimum password age should be set to 1 or more days")
+        else:
+            print(Fore.RED + "[-] Error: Maximum password age value is not valid.")
+            error_checks += 1               
+    else:
+        print(Fore.RED + "=====================================================================")
+        print(Fore.RED + f"1.1.2 Command failed. Error output: {min_password_age_result.stderr}")
+        print(Fore.RED + "=====================================================================")
+        error_checks += 1    
+
+
+    print()
+    
+    
+
+
+
+
+
+
+
 
 
     print()
