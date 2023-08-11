@@ -25,22 +25,28 @@ def password_policy_check():
     print()
     time.sleep(1)
     
-    password_history = "net accounts | Select-String 'Password history' | ForEach-Object { $_ -replace '\D+(\d+)','$1'}"
+    password_history = "net accounts | Select-String 'Password history' | ForEach-Object { $_ -replace '\\D+(\d+|None)','$1'}"
     password_history_result = subprocess.run(['powershell', '-command', password_history], shell=True, capture_output=True, text=True)
+
     if password_history_result.returncode == 0:
         output = password_history_result.stdout.strip()
-        if output.isdigit():
-            password_history_value = int(output)
-            if password_history_value >= 24:
-                print(Fore.GREEN + "[+] 1.1.1 PASSED: Length of password history value:", password_history_value)
-                passed_checks += 1 
-            else:
-                print(Fore.RED + "[-] 1.1.1 FAILED: Length of password history value:", password_history_value)
-                print(Fore.RED + "   [!] Password history length should be 24 or more.")
-                failed_checks += 1
+        if output == "None":
+            print(Fore.RED + "[-] 1.1.1 FAILED: Length of password history value:", output)
+            print(Fore.RED + "   [!] Password history length should be 24 or more.")
+            failed_checks += 1
         else:
-            print(Fore.RED + "[-] Error: Length of password history value is not valid.")
-            error_checks += 1
+            try:
+                password_history_value = int(output)
+                if password_history_value >= 24:
+                    print(Fore.GREEN + "[+] 1.1.1 PASSED: Length of password history value:", password_history_value)
+                    passed_checks += 1
+                else:
+                    print(Fore.RED + "[-] 1.1.1 FAILED: Length of password history value:", password_history_value)
+                    print(Fore.RED + "   [!] Password history length should be 24 or more.")
+                    failed_checks += 1
+            except ValueError:
+                print(Fore.RED + "[-] 1.1.1 FAILED: Length of password history value is not valid.")
+                error_checks += 1
     else:
         print(Fore.RED + "=====================================================================")
         print(Fore.RED + f"1.1.1 Command failed. Error output: {password_history_result.stderr}")
@@ -81,6 +87,13 @@ def password_policy_check():
     print(Fore.RED + f"Checks Errored: {error_checks}")
 
 
-def splitter():
-    splitter = Fore.MAGENTA + "================================================"
-    print(splitter)
+
+
+
+
+
+
+
+def spliter():
+    spliter = Fore.MAGENTA + "================================================"
+    print(spliter)
