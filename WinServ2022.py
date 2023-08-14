@@ -45,7 +45,7 @@ def password_policy_check():
                     print(Fore.RED + "   [!] Password history length should be 24 or more.")
                     failed_checks += 1
             except ValueError:
-                print(Fore.RED + "[-] 1.1.1 FAILED: Length of password history value is not valid.")
+                print(Fore.RED + "[!] Error: Length of password history value is not valid.")
                 error_checks += 1
     else:
         print(Fore.RED + "=====================================================================")
