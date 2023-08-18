@@ -129,6 +129,11 @@ def winserv2022_da():
 
     print()
     
+    print(Fore.LIGHTBLACK_EX + "[!] 1.1.6 Doesn't apply to Domain Controller")
+    
+    print()
+    
+    
     
 
     print()
