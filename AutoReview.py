@@ -61,6 +61,8 @@ def main():
                     print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "Domain Controller")
                     print()
                     WinServ2022.winserv2022_da()
+                elif profile_applicability_choice == "2":
+                    print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "Member Server")
             elif windows_choice == "2":
                 print(Fore.GREEN + "[+] You selected: " + Fore.YELLOW + "CIS Microsoft Windows Server 2019 Benchmark v2.0.0")
             elif windows_choice == "3":
